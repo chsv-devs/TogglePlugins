@@ -1,6 +1,6 @@
 name: TogglePlugins
 author: Hancho
-version: 1.0.0
+version: 1.0.1
 main: hancho.TogglePlugins.TogglePlugins
 api: [1.0.0]
 
@@ -10,7 +10,4 @@ commands:
      permission: 'op'
     unloadplugin:
      description: unload plugin
-     permission: 'op'
-    forceunloadplugin:
-     description: unload plugin without onDisable
      permission: 'op'

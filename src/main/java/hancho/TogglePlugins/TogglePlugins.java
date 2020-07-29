@@ -2,6 +2,7 @@ package hancho.TogglePlugins;
 
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.event.HandlerList;
 import cn.nukkit.event.Listener;
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.PluginBase;
@@ -19,11 +20,13 @@ public class TogglePlugins extends PluginBase implements Listener {
 				sender.sendMessage("§f§l[ §c! §f] /loadplugin <PluginFileName>");
 				return false;
 			}
+			
+			Plugin plugin = this.getServer().getPluginManager().loadPlugin(this.getServer().getPluginPath() + "/" + args[0] + ".jar");
 
-			if (this.getServer().getPluginManager()
-					.loadPlugin(this.getServer().getPluginPath() + "/" + args[0] + ".jar") == null) {
+			if (plugin == null) {
 				sender.sendMessage("§f§l[ §c! §f] Could not load " + args[0] + ".jar");
 			} else {
+				this.getServer().getPluginManager().enablePlugin(plugin);
 				sender.sendMessage("§f§l[ §6! §f] Successfully loaded.");
 			}
 
@@ -39,10 +42,6 @@ public class TogglePlugins extends PluginBase implements Listener {
 			if (plugin == null) {
 				sender.sendMessage("§f§l[ §c! §f] Could not find " + args[0]);
 				return false;
-			}
-
-			if (cmd.getName().equals("unloadplugin")) {
-				plugin.onDisable();
 			}
 
 			this.getServer().getPluginManager().disablePlugin(plugin);
